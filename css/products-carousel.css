@@ -1,0 +1,8 @@
+.products-carousel {
+    display: flex;
+    justify-content: center;
+}
+
+.products-carousel__slide-container {
+    display: flex;
+}

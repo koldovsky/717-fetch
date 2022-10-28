@@ -1,40 +1,28 @@
-(function () {
-  const products = [
-    {
-      id: "1",
-      title: "Baby Yoda",
-      imageUrl: "img/baby-yoda.svg",
-      description: "Baby Yoda Sticker...",
-      category: "sport",
-      price: 9.99,
-    },
-    {
-      id: "2",
-      title: "Banana",
-      imageUrl: "img/banana.svg",
-      description: "Banana Sticker...",
-      category: "sport",
-      price: 8.99,
-    },
-    {
-      id: "3",
-      title: "Girl",
-      imageUrl: "img/girl.svg",
-      description: "Girl Sticker...",
-      category: "fun",
-      price: 7.99,
-    },
-    {
-      id: "4",
-      title: "Viking",
-      imageUrl: "img/viking.svg",
-      description: "Viking Sticker...",
-      category: "fun",
-      price: 8.99,
-    },
-  ];
+(async function () {
+  
+  const response = await fetch('api/products.json');
+  const products = await response.json();
+  let rates;
   let currentCategory = "";
-  function renderProducts(products) {
+  let rate = 1;
+  renderProducts();
+
+  // fetch('api/products.json')
+  //   .then( response => response.json() )
+  //   .then( products => renderProducts(products) );
+
+  // AJAX:
+  // const xhr = new XMLHttpRequest();
+  // xhr.onreadystatechange = function() {
+  //   if (xhr.readyState === 4 && xhr.status === 200) {
+  //     const products = JSON.parse(xhr.responseText);
+  //     renderProducts(products);
+  //   }
+  // }
+  // xhr.open('get', 'api/products.json', true);
+  // xhr.send();
+
+  function renderProducts() {
     const productsContainer = document.querySelector(".main-products__list");
     productsContainer.innerHTML = "";
     const filteredProducts = products.filter(
@@ -55,13 +43,13 @@
             Info
           </button>
           <button class="product-card__buttons-buy button button-card">
-            Buy - $${product.price}
+            Buy - ${(product.price * rate).toFixed(2)}
           </button>
         </div>
       </article>`;
     }
   }
-  renderProducts(products);
+  // renderProducts(products);
   document.querySelector(".category-sport").addEventListener("click", (ev) => {
     clearActiveCategories();
     ev.target.classList.add('active');
@@ -86,5 +74,18 @@
       button.classList.remove('active');
     }
   };
+
+  const convertCurrencyButton = document.querySelector('.convert-currency');
+  convertCurrencyButton.addEventListener('click', convertCurrency);
+
+  async function convertCurrency() {
+    const currency = document.querySelector('.currency').value;
+    if (!rates) {
+      const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+      rates = await response.json();
+    }
+    rate = rates.rates[currency];
+    renderProducts();
+  }
 
 })();

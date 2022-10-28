@@ -1,0 +1,35 @@
+[
+    {
+       "id":"1",
+       "title":"Baby Yoda",
+       "imageUrl":"img/baby-yoda.svg",
+       "description":"Baby Yoda Sticker...",
+       "category":"sport",
+       "price":9.99
+    },
+    {
+       "id":"2",
+       "title":"Banana",
+       "imageUrl":"img/banana.svg",
+       "description":"Banana Sticker...",
+       "category":"sport",
+       "price":8.99
+    },
+    {
+       "id":"3",
+       "title":"Girl",
+       "imageUrl":"img/girl.svg",
+       "description":"Girl Sticker...",
+       "category":"fun",
+       "price":7.99
+    },
+    {
+       "id":"4",
+       "title":"Viking",
+       "imageUrl":"img/viking.svg",
+       "description":"Viking Sticker...",
+       "category":"fun",
+       "price":8.99
+    }
+ ]
+ 
